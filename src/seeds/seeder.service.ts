@@ -223,7 +223,7 @@ export class SeederService {
           {
             name: 'Parches PNG',
             description: 'Útil para reumatismo y dolores articulares. Hechos 100% con ingredientes naturales.',
-            price: 39999,
+            price: 500000,
             stock: 30,
             category: categoryMap.get('parches'),
             style: 'Terapéutico',
@@ -234,7 +234,7 @@ export class SeederService {
           {
             name: 'Vitamina B12',
             description: 'Mejora niveles de energía y apoya la función neurológica. Fórmula de alta absorción.',
-            price: 24999,
+            price: 256000,
             stock: 45,
             category: categoryMap.get('vitaminas'),
             style: 'Suplemento',
@@ -245,7 +245,7 @@ export class SeederService {
           {
             name: 'Melatonin Plus',
             description: 'Mejora la calidad del sueño, regula el ciclo circadiano y ofrece liberación gradual.',
-            price: 19999,
+            price: 244000,
             stock: 60,
             category: categoryMap.get('suplementos'),
             style: 'Suplemento',
@@ -256,7 +256,7 @@ export class SeederService {
           {
             name: 'Slime Style',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 325000,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
@@ -267,7 +267,7 @@ export class SeederService {
           {
             name: 'Omevia',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 268800,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
@@ -278,7 +278,7 @@ export class SeederService {
           {
             name: 'Dekamin',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 244000,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
@@ -289,7 +289,7 @@ export class SeederService {
           {
             name: 'Sornie (Collagen Patch )',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 500000,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
@@ -300,7 +300,7 @@ export class SeederService {
           {
             name: 'Sornie(Anti-Maging Mask)',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 500000,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
@@ -311,7 +311,7 @@ export class SeederService {
           {
             name: 'Nigth Gentlemen',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 500000,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
@@ -322,7 +322,7 @@ export class SeederService {
           {
             name: 'Nigth Lady s',
             description: 'Fortalece el sistema inmune con ingredientes antioxidantes y 100% orgánicos.',
-            price: 29999,
+            price: 500000,
             stock: 40,
             category: categoryMap.get('suplementos'),
             style: 'Natural',
