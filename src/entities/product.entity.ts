@@ -48,12 +48,9 @@ export class Product {
   @Column({ type: 'int', default: 0, nullable: true })
   discount: number;
 
-  @Column({
-    type: 'enum',
-    enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    nullable: true,
-  })
+  @Column({ type: 'varchar', length: 50, nullable: true })
   size: string;
+  
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   style: string;
