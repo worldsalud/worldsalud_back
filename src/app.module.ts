@@ -32,6 +32,7 @@ import { Magazine } from './entities/magazine.entity';
 import { CommentModule } from './comment/comment.module';
 import { Comment } from './entities/comment.entity';
 import { PerspectiveModule } from './perspective/perspective.module';
+import { RecommendationModule } from './recommendation/recommendation.module';
 
 @Module({
   imports: [
@@ -76,7 +77,8 @@ import { PerspectiveModule } from './perspective/perspective.module';
     MagazineModule,
     FinanzasModule,
     CommentModule,
-    PerspectiveModule
+    PerspectiveModule,
+    RecommendationModule
   ],
   providers: [SeederService, CloudinaryConfig, Chatbot],
 })
@@ -87,7 +89,6 @@ export class AppModule implements OnModuleInit {
     await this.seederService.seed();
   }
   configure(consumer: MiddlewareConsumer) {
-    // Aquí aplicamos el middleware a todas las rutas
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }

@@ -10,6 +10,7 @@ import { StockMovements } from 'src/entities/stock-movement.entiy';
 import { StockMovementsModule } from 'src/stock-movements/stock-movements.module';
 import { Magazine } from 'src/entities/magazine.entity';
 import { MagazineModule } from 'src/magazine/magazine.module';
+import { RecommendationModule } from 'src/recommendation/recommendation.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { MagazineModule } from 'src/magazine/magazine.module';
     ]),
     UsersModule,
     StockMovementsModule,
-    MagazineModule
+    MagazineModule,
+    RecommendationModule
   ],
   providers: [SeederService],
   exports: [SeederService],
