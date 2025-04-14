@@ -362,21 +362,108 @@ export class SeederService {
     }
 
     console.log('✅ Movimientos de stock inicial registrados.');
-
-
     const recommendationSeeds = [
-      {
-        padecimiento: 'Cáncer de páncreas',
-        productos: ['Parches PNG', 'Omevia', 'Melatonin Plus'],
-        comentarios: 'PNG medio en páncreas y la otra mitad en el omoplato derecho',
-      },
-      {
-        padecimiento: 'Ataques de pánico',
-        productos: ['Vitamina B12', 'Melatonin Plus', 'Parches PNG'],
-        comentarios: '',
-      },
+        {
+          padecimiento: "Cáncer de páncreas",
+          productos: ["Parches PNG", "Omevia", "Melatonin Plus"],
+          comentarios: "PNG medio en páncreas y la otra mitad en el omoplato derecho",
+        },
+        {
+          padecimiento: "Neoplasia pancreática",
+          productos: ["Parches PNG", "Omevia", "Melatonin Plus"],
+          comentarios: "PNG medio en páncreas y un entero en el omoplato derecho",
+        },
+        {
+          padecimiento: "Ataques de pánico",
+          productos: ["Vitamina B12", "Melatonin Plus", "Parches PNG"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Parkinson",
+          productos: ["Parches PNG", "Vitamina B12", "Melatonin Plus"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Embarazo",
+          productos: ["Parches PNG", "Dekamin", "Melatonin Plus"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Próstata",
+          productos: ["Nigth Gentlemen", "Parches PNG"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Psoriasis",
+          productos: ["Parches PNG", "Omevia", "Dekamin", "Melatonin Plus"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Enfermedades pulmonares",
+          productos: ["Parches PNG", "Omevia", "Melatonin Plus"],
+          comentarios: "PNG la mitad sobre cada pulmón",
+        },
+        {
+          padecimiento: "Infecciones pulmonares",
+          productos: ["Parches PNG", "Dekamin", "Melatonin Plus"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Recuperación tras esfuerzo intenso",
+          productos: ["Parches PNG", "Melatonin Plus"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Reumatismo",
+          productos: ["Parches PNG", "Omevia", "Vitamina B12"],
+          comentarios: "Pegar trozos de PNG alrededor del área afectada",
+        },
+        {
+          padecimiento: "Espondilosis",
+          productos: ["Parches PNG", "Omevia", "Dekamin", "Sornie (Collagen Patch )"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Trazos",
+          productos: ["Omevia", "Melatonin Plus", "Vitamina B12", "Parches PNG"],
+          comentarios: "Si es Isquemia, añadir PNG",
+        },
+        {
+          padecimiento: "Hinchazón de Piernas",
+          productos: ["Parches PNG"],
+          comentarios: "En plantas de pies",
+        },
+        {
+          padecimiento: "Tiroides",
+          productos: ["Parches PNG", "Vitamina B12", "Omevia"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Tinnitus",
+          productos: ["Melatonin Plus", "Vitamina B12", "Parches PNG"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Úlcera, ácido gástrico",
+          productos: ["Melatonin Plus"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Venas Varicosas",
+          productos: ["Parches PNG", "Omevia"],
+          comentarios: "La mitad al inicio de la zona afectada y la otra mitad al final + ducha de agua fría en las piernas",
+        },
+        {
+          padecimiento: "Vértigo, mareo",
+          productos: ["Vitamina B12", "Melatonin Plus", "Parches PNG"],
+          comentarios: "",
+        },
+        {
+          padecimiento: "Cuerdas vocales",
+          productos: ["Parches PNG"],
+          comentarios: "La mitad en cada lado de la garganta",
+        },
     ];
-    
     for (const seed of recommendationSeeds) {
       // Verificar si ya existe la recomendación por padecimiento
       const existing = await this.recommendationRepository.findOne({
