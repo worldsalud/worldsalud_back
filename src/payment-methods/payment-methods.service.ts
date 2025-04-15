@@ -46,13 +46,13 @@ export class PaymentMethodsService {
           external_reference: orderId,
           back_urls: {
             /// APLIQUE CAMBIOS A LA URL ///
-            success: 'https://ink3d-tech-2-0.vercel.app/orders',
-            failure: 'https://ink3d-tech-2-0.vercel.app/orders',
-            pending: 'https://ink3d-tech-2-0.vercel.app/orders',
+            success: 'https://worldsalud.vercel.app/orders',
+            failure: 'https://worldsalud.vercel.app/orders',
+            pending: 'https://worldsalud.vercel.app/orders',
           },
           auto_return: 'approved',
           notification_url:
-            'https://project-ink3d-back-1.onrender.com/payment-methods/webhook',
+            'https://worldsalud-back.onrender.com/payment-methods/webhook',
         },
       };
 
