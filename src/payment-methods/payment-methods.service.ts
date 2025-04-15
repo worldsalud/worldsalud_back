@@ -69,7 +69,7 @@ export class PaymentMethodsService {
         throw new BadRequestException('Order or user not found');
       }
       order.status = 'pending';
-      order.externalReference = response.id; // Guardamos el preference_id en la base de datos
+      order.externalReference = response.id; 
       await this.ordersRepository.save(order);
 
       const userEmail = order.user.email;
