@@ -1,4 +1,3 @@
-// src/modules/recommendation/dto/recommendation-response.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 import { Product } from '../../entities/product.entity';
 
@@ -14,4 +13,7 @@ export class RecommendationResponseDto {
 
   @ApiProperty({ type: [Product] })
   productosRecomendados: Product[];
+
+  @ApiProperty({ description: 'Precio total del combo de productos', example: 45900 })
+  comboPrice: number;
 }
