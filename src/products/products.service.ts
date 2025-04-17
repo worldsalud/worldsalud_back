@@ -43,43 +43,54 @@ export class ProductsService {
     });
   }
 
-  async create(productData: CreateProductDto): Promise<Product> {
-    const category = await this.categoryRepository.findOne({
-      where: { id: productData.category.id },
-      relations: ['products'],
-    });
 
-    if (!category) {
-      throw new NotFoundException('Category not found');
-    }
 
-    const newProduct = this.productRepository.create({
-      ...productData,
-      category,
-      style: productData.style ?? 'Motorsport',
-    });
+async create(productData: CreateProductDto): Promise<Product> {
+  const category = await this.categoryRepository.findOne({
+    where: { id: productData.category.id },
+    relations: ['products'],
+  });
 
-    const savedProduct = await this.productRepository.save(newProduct);
-
-    // Registrar el movimiento de stock para el stock inicial
-    if (savedProduct.stock > 0) {
-      await this.stockMovementsService.createStockMovement({
-        productId: savedProduct.id,
-        quantity: savedProduct.stock,
-        previousStock: 0,
-        newStock: savedProduct.stock,
-        type: 'initial_stock',
-        reason: 'Initial stock entry',
-      });
-    }
-    return savedProduct;
+  if (!category) {
+    throw new NotFoundException('Categoria no encontrada');
   }
+  const priceNumber = parseFloat(productData.price as any);  
+  if (isNaN(priceNumber)) {
+    throw new NotFoundException('El precio debe ser un número válido');
+  }
+  const newProduct = this.productRepository.create({
+    ...productData,
+    category,
+    style: productData.style ?? 'Bienestar',
+    price: priceNumber,
+  });
+  const savedProduct = await this.productRepository.save(newProduct);
+  if (savedProduct.stock > 0) {
+    await this.stockMovementsService.createStockMovement({
+      productId: savedProduct.id,
+      quantity: savedProduct.stock,
+      previousStock: 0,
+      newStock: savedProduct.stock,
+      type: 'initial_stock',
+      reason: 'Initial stock entry',
+    });
+  }
+  return savedProduct;
+}
+
+
+
   async findByStyle(style: string): Promise<Product[]> {
     return this.productRepository.find({
       where: { style: Like(`%${style}%`) },
       relations: ['category'],
     });
   }
+
+
+
+
+
   async updateProduct(
     id: string,
     productData: UpdateProductDto,
@@ -89,6 +100,16 @@ export class ProductsService {
       throw new NotFoundException('Product not found');
     }
     let stockChange = 0;
+  
+    // Convertir el precio a número si está presente
+    if (productData.price !== undefined) {
+      const priceNumber = parseFloat(productData.price as any);  // Asegúrate de que 'price' sea un número
+      if (isNaN(priceNumber)) {
+        throw new NotFoundException('El precio debe ser un número válido');
+      }
+      product.price = priceNumber;
+    }
+  
     if (productData.category) {
       const category = await this.categoryRepository.findOne({
         where: { id: productData.category.id },
@@ -98,6 +119,7 @@ export class ProductsService {
       }
       product.category = category;
     }
+  
     // Calcular cambio en el stock
     if (
       productData.stock !== undefined &&
@@ -105,10 +127,12 @@ export class ProductsService {
     ) {
       stockChange = productData.stock - product.stock;
     }
+  
     // Asignar nuevos valores sin sobrescribir valores no definidos
     Object.assign(product, productData, {
       style: productData.style ?? product.style,
     });
+    
     const updatedProduct = await this.productRepository.save(product);
     if (stockChange !== 0) {
       await this.stockMovementsService.createStockMovement({
@@ -122,6 +146,11 @@ export class ProductsService {
     }
     return updatedProduct;
   }
+  
+
+
+
+
   async deactivateProduct(id: string): Promise<Product> {
     const product = await this.productRepository.findOne({ where: { id } });
     if (!product) {

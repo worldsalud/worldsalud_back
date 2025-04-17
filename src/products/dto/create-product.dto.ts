@@ -23,8 +23,8 @@ enum Sizes {
 export class CreateProductDto {
 
   @ApiProperty({
-    example: 'ASIAN',
-    description: 'Product style (e.g., Asian, MotorSport, Formal)',
+    example: 'Bienestar',
+    description: 'producto',
     required: false,
   })
   @IsString()
@@ -32,14 +32,14 @@ export class CreateProductDto {
   @Length(1, 100)
   style?: string;
 
-  @ApiProperty({ example: 'Camiseta Negra', description: 'Product name' })
+  @ApiProperty({ example: 'Parches PNG', description: 'Product name' })
   @IsNotEmpty()
   @IsString()
   @Length(1, 255)
   name: string;
 
   @ApiProperty({
-    example: 'Camiseta negra de algodón 100%',
+    example: 'Parches PNG',
     description: 'Product description',
   })
   @IsNotEmpty()

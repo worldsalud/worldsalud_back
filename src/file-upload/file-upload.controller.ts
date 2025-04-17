@@ -50,37 +50,37 @@ export class FileUploadController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Image uploaded',
+    description: 'Imagen subida correctamente',
   })
   @ApiResponse({
     status: 400,
     example: {
-      message: 'Validation failed',
-      error: 'Bad Request',
+      message: 'La validación falló',
+      error: 	'Solicitud incorrecta',
       statusCode: 400,
     },
   })
   @ApiResponse({
     status: 401,
     example: {
-      message: 'Invalid token',
-      error: 'Unauthorized',
+      message: 'Token inválido',
+      error: 'No autorizado',
       statusCode: 401,
     },
   })
   @ApiResponse({
     status: 403,
     example: {
-      message: 'You do not have permission to access this resource!',
-      error: 'Forbidden',
+      message: 'No tienes permiso para acceder a este recurso.',
+      error: 'Prohibido',
       statusCode: 403,
     },
   })
   @ApiResponse({
     status: 404,
     example: {
-      message: 'Product not found',
-      error: 'Not Found',
+      message: 'Producto no encontrado',
+      error: 'No encontrado',
       statusCode: 404,
     },
   })
@@ -108,28 +108,28 @@ export class FileUploadController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Image uploaded',
+    description: 'Imagen subida correctamente',
   })
   @ApiResponse({
     status: 400,
     example: {
-      message: 'Validation failed',
-      error: 'Bad Request',
+      message: 	'La validación falló',
+      error: 'Solicitud incorrecta',
       statusCode: 400,
     },
   })
   @ApiResponse({
     status: 401,
     example: {
-      message: 'Invalid token',
-      error: 'Unauthorized',
+      message: 'Token inválido',
+      error: 'No autorizado',
       statusCode: 401,
     },
   })
   @ApiResponse({
     status: 403,
     example: {
-      message: 'You do not have permission to access this resource!',
+      message: 'No tienes permiso para acceder a este recurso.',
       error: 'Forbidden',
       statusCode: 403,
     },
@@ -137,8 +137,8 @@ export class FileUploadController {
   @ApiResponse({
     status: 404,
     example: {
-      message: 'Product not found',
-      error: 'Not Found',
+      message: 'Producto no encontrado',
+      error: 'No encontrado',
       statusCode: 404,
     },
   })
@@ -149,10 +149,10 @@ export class FileUploadController {
         validators: [
           new MaxFileSizeValidator({
             maxSize: 600000,
-            message: 'File must be maximum 600kb',
+            message: 'El archivo debe tener un tamaño máximo de 600kb',
           }),
           new FileTypeValidator({
-            fileType: /(jpg|jpeg|png|webp)$/,
+            fileType: /(jpg|jpeg|png|webp|mp4|mov|avi)$/,
           }),
         ],
       }),
@@ -161,6 +161,9 @@ export class FileUploadController {
   ) {
     return this.fileUploadService.uploadProductImage(file, productId);
   }
+
+
+
 
   @ApiTags('Users')
   @Post('uploadImage/user/:userId')
@@ -182,37 +185,37 @@ export class FileUploadController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Image uploaded',
+    description: 'Imagen subida correctamente',
   })
   @ApiResponse({
     status: 400,
     example: {
-      message: 'Validation failed',
-      error: 'Bad Request',
+      message: 'La validación falló',
+      error: 'Solicitud incorrecta',
       statusCode: 400,
     },
   })
   @ApiResponse({
     status: 401,
     example: {
-      message: 'Invalid token',
-      error: 'Unauthorized',
+      message: 'Token inválido',
+      error: 'No autorizado',
       statusCode: 401,
     },
   })
   @ApiResponse({
     status: 403,
     example: {
-      message: 'You do not have permission to access this resource!',
-      error: 'Forbidden',
+      message: 'No tienes permiso para acceder a este recurso.',
+      error: 	'Prohibido',
       statusCode: 403,
     },
   })
   @ApiResponse({
     status: 404,
     example: {
-      message: 'User not found',
-      error: 'Not Found',
+      message: 	'Usuario no encontrado',
+      error: 'No encontrado',
       statusCode: 404,
     },
   })
@@ -223,10 +226,10 @@ export class FileUploadController {
         validators: [
           new MaxFileSizeValidator({
             maxSize: 600000,
-            message: 'File must be maximum 200kb',
+            message: 'El archivo debe tener un tamaño máximo de 200kb',
           }),
           new FileTypeValidator({
-            fileType: /(jpg|jpeg|png|webp)$/,
+            fileType: /(jpg|jpeg|png|webp|mp4|mov|avi)$/,
           }),
         ],
       }),
