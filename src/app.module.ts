@@ -33,6 +33,7 @@ import { CommentModule } from './comment/comment.module';
 import { Comment } from './entities/comment.entity';
 import { PerspectiveModule } from './perspective/perspective.module';
 import { RecommendationModule } from './recommendation/recommendation.module';
+import { TestimonialsModule } from './testimonials/testimonials.module';
 
 @Module({
   imports: [
@@ -78,7 +79,8 @@ import { RecommendationModule } from './recommendation/recommendation.module';
     FinanzasModule,
     CommentModule,
     PerspectiveModule,
-    RecommendationModule
+    RecommendationModule,
+    TestimonialsModule
   ],
   providers: [SeederService, CloudinaryConfig, Chatbot],
 })

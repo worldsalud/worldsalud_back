@@ -23,5 +23,6 @@ import { User } from 'src/entities/user.entity';
     ProductsService,
     StockMovementsService,
   ],
+  exports: [FileUploadService], 
 })
 export class FileUploadModule {}

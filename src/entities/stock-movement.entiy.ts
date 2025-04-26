@@ -25,17 +25,17 @@ export class StockMovements {
   
 
   @Column({ type: 'int' })
-  newStock: number; // Nuevo: Para saber el stock después del movimiento
+  newStock: number; 
 
   @Column({
     type: 'enum',
     enum: [
-      'initial_stock', // Stock inicial al crear el producto
-      'supplies_purchase', // Compra de proveedores
-      'manual_add', // Agregado manualmente
-      'order_creation', // Venta realizada
-      'order_cancellation', // Cancelación de venta (se devuelve stock)
-      'manual_take', // Ajuste manual de stock
+      'initial_stock',
+      'supplies_purchase', 
+      'manual_add', 
+      'order_creation', 
+      'order_cancellation', 
+      'manual_take', 
     ],
   })
   type: string;
