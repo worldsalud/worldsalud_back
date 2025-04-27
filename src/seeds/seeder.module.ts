@@ -11,6 +11,7 @@ import { StockMovementsModule } from 'src/stock-movements/stock-movements.module
 import { Magazine } from 'src/entities/magazine.entity';
 import { MagazineModule } from 'src/magazine/magazine.module';
 import { RecommendationModule } from 'src/recommendation/recommendation.module';
+import { Testimonial } from 'src/entities/testimonial.entity';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RecommendationModule } from 'src/recommendation/recommendation.module';
       Order,
       StockMovements,
       Magazine,
+      Testimonial
     ]),
     UsersModule,
     StockMovementsModule,

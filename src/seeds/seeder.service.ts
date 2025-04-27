@@ -1,144 +1,3 @@
-// import { Injectable } from '@nestjs/common';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
-// import { Product } from 'src/entities/product.entity';
-// import { Category } from 'src/entities/category.entity';
-// import { User } from 'src/entities/user.entity';
-// import { Order } from 'src/entities/order.entity';
-// import * as bcrypt from 'bcrypt';
-// import { StockMovements } from 'src/entities/stock-movement.entiy';
-// import { Magazine } from 'src/entities/magazine.entity';
-
-// async function hashPassword(password: string): Promise<string> {
-//   const salt = await bcrypt.genSalt(10);
-//   return bcrypt.hash(password, salt);
-// }
-
-// @Injectable()
-// export class SeederService {
-//   constructor(
-//     @InjectRepository(Product)
-//     private readonly productRepository: Repository<Product>,
-//     @InjectRepository(Category)
-//     private readonly categoryRepository: Repository<Category>,
-//     @InjectRepository(User)
-//     private readonly userRepository: Repository<User>,
-//     @InjectRepository(Order)
-//     private readonly orderRepository: Repository<Order>,
-//     @InjectRepository(StockMovements)
-//     private readonly stockMovementRepository: Repository<StockMovements>,
-//     @InjectRepository(Magazine)
-//     private readonly magazineRepository: Repository<Magazine>,
-//   ) { }
-
-//   async seed() {
-//     console.log('🚀 Iniciando Seed...');
-
-//     const categoryNames = ['Ropa', 'Calzado', 'Accesorios'];
-//     const createdCategories: Category[] = await Promise.all(
-//       categoryNames.map(async (name) => {
-//         let category = await this.categoryRepository.findOne({
-//           where: { name },
-//         });
-//         if (!category) {
-//           category = this.categoryRepository.create({ name });
-//           await this.categoryRepository.save(category);
-//         }
-//         return category;
-//       }),
-//     );
-//     const categoryMap = new Map<string, Category>();
-//     categoryMap.set('ropa', createdCategories[0]);
-//     categoryMap.set('calzado', createdCategories[1]);
-//     categoryMap.set('accesorios', createdCategories[2]);
-
-//     const usersData = [
-//       {
-//         name: 'Admin', email: 'admin@example.com', password: '@dm!n1234', role: 'admin',
-//       },
-//     ];
-//     const createdUsers = await Promise.all(
-//       usersData.map(async (userData) => {
-//         let user = await this.userRepository.findOne({
-//           where: { email: userData.email },
-//         });
-//         if (!user) {
-//           userData.password = await hashPassword(userData.password);
-//           user = this.userRepository.create(userData);
-//           await this.userRepository.save(user);
-//         }
-//         return user;
-//       }),
-//     );
-//     const userMap = new Map<string, User>();
-//     userMap.set('juan', createdUsers[0]);
-//     userMap.set('ana', createdUsers[1]);
-
-//     /** 🔹 3️⃣ Crear Productos */
-//     let existingProducts = await this.productRepository.find();
-//     if (existingProducts.length === 0) {
-//       const products: Partial<Product>[] = [
-//         {
-//           name: 'Remera senna edition',
-//           description: 'Remera senna editio limitada',
-//           price: 1999,
-//           stock: 25,
-//           category: categoryMap.get('ropa'),
-//           style: "Motorsport",
-//           size: 'M',
-//           isActive: true,
-//           image: ["https://i.pinimg.com/736x/16/9a/49/169a497c320601b50225324917ef52e8.jpg"]
-//         },
-//         {
-//           name: 'Pantalón sport N6 custom',
-//           description: 'Pantalón sport N6 custom edicion limitada',
-//           price: 3999,
-//           stock: 30,
-//           category: categoryMap.get('ropa'),
-//           style: "Streetwear",
-//           size: 'L',
-//           isActive: true,
-//           image: ["https://i.pinimg.com/736x/f0/04/6d/f0046df3f87ce98891f4d355402209b1.jpg"]
-//         },
-//         {
-//           name: 'Camiseta Urban Tokyo',
-//           description: "Camiseta de algodón con diseño inspirado en la cultura urbana de Tokio, gráficos minimalistas y ajuste oversize.",
-//           price: 2499,
-//           stock: 20,
-//           category: categoryMap.get("ropa"),
-//           style: "Asian",
-//           size: "L",
-//           isActive: true,
-//           image: ["https://i.pinimg.com/736x/9a/4c/3b/9a4c3b36c408866a7d18fbd7f18f5bed.jpg", "https://i.pinimg.com/736x/bb/da/55/bbda557c26ae321a27f130a1101ee58b.jpg"]
-//         },
-//       ];
-//       await this.productRepository.save(products);
-//       console.log("✅ Productos insertados correctamente en la base de datos.");
-//       const existingPosts = await this.magazineRepository.find();
-//       if (existingPosts.length === 0) {
-//         const posts: Partial<Magazine>[] = [
-//             {
-//               category: 'MUNDO ASIAN',
-//               title: '¿Por qué es tan cool  Asian Style?',
-//               content:
-//                 ' El Asian Style no sigue tendencias, las crea. Mientras en otros lugares la moda tarda en evolucionar, en Asia las calles son pasarelas vivas donde cada prenda tiene actitud. Se trata de jugar con texturas, siluetas oversized y prendas funcionales que te hacen ver como salido de una película cyberpunk.Las piezas clave para dominar el look:Cortavientos techwear  Ligero, futurista y perfecto para el caos urbano.Pantalones cargo ultra cómodos Bolsillos estratégicos para guardar desde el celular hasta los snacks.Sneakers chunky o minimalistas  Todo depende de qué tan "extra" quieras ser.Camisetas oversized con tipografías asiáticas – Porque un buen print siempre dice algo, aunque no entiendas qué.Tip de INK3D:El truco del Asian Style está en mezclar sin miedo: prueba un pantalón ancho con un top ajustado o una chaqueta oversized con sneakers futuristas. Recuerda, más que un outfit, es una actitud.',
-//               image:
-//                 'https://i.pinimg.com/736x/44/60/d7/4460d73f5184e3ef7a5ba50180e93f56.jpg',
-//               author: 'Emma Blue',
-//             },
-//         ];
-//         await this.magazineRepository.save(posts);
-//       }
-//       console.log(
-//         '✅ Seed de categorías, productos, usuarios, órdenes, movimientos de stock y posts en magazine completado.',
-//       );
-//     }
-//   }
-// }
-
-
-
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -146,17 +5,15 @@ import { Product } from 'src/entities/product.entity';
 import { Category } from 'src/entities/category.entity';
 import { User } from 'src/entities/user.entity';
 import { Order } from 'src/entities/order.entity';
-import * as bcrypt from 'bcrypt';
 import { StockMovements } from 'src/entities/stock-movement.entiy';
 import { Magazine } from 'src/entities/magazine.entity';
 import { Recommendation } from 'src/entities/recommendation.entity';
-
-
+import { Testimonial } from 'src/entities/testimonial.entity';
+import * as bcrypt from 'bcrypt';
 async function hashPassword(password: string): Promise<string> {
   const salt = await bcrypt.genSalt(10);
   return bcrypt.hash(password, salt);
 }
-
 @Injectable()
 export class SeederService {
   constructor(
@@ -174,11 +31,11 @@ export class SeederService {
     private readonly magazineRepository: Repository<Magazine>,
     @InjectRepository(Recommendation)
     private readonly recommendationRepository: Repository<Recommendation>,
+    @InjectRepository(Testimonial)
+    private readonly testimonialRepository: Repository<Testimonial>,
   ) { }
-
   async seed() {
     console.log('🌿 Iniciando Seed World Salud...');
-
     /** 🔸 1️⃣ Crear categorías naturales */
     const categoryNames = ['Bienestar', 'Intima', 'Cosmética'];
     const createdCategories: Category[] = await Promise.all(
@@ -191,13 +48,10 @@ export class SeederService {
         return category;
       }),
     );
-
     const categoryMap = new Map<string, Category>();
     categoryMap.set('bienestar', createdCategories[0]);
     categoryMap.set('intima', createdCategories[1]);
     categoryMap.set('cosmética', createdCategories[2]);
-
-
     /** 🔸 2️⃣ Crear usuario admin */
     const usersData = [
       {
@@ -384,7 +238,7 @@ export class SeederService {
       },
       {
         padecimiento: "Ansiedad",
-        productos: ["Vitamina B12","Melatonin Plus","Parches PNG","Omevia"]
+        productos: ["Vitamina B12", "Melatonin Plus", "Parches PNG", "Omevia"]
         , comentarios: ""
       },
       {
@@ -394,7 +248,7 @@ export class SeederService {
       },
       {
         padecimiento: "Asma",
-        productos: ["Parches PNG","Vitamina B12","Melatonin Plus"]
+        productos: ["Parches PNG", "Vitamina B12", "Melatonin Plus"]
         , comentarios: "Usar por 6 meses"
       },
       {
@@ -429,7 +283,7 @@ export class SeederService {
       },
       {
         padecimiento: "Cáncer/Tumores",
-        productos: ["Melatonin Plus", "Parches PNG","Vitamina B12"]
+        productos: ["Melatonin Plus", "Parches PNG", "Vitamina B12"]
         , comentarios: "Excepto cáncer de mama, de ovario y leucemia"
       },
       {
@@ -444,7 +298,7 @@ export class SeederService {
       },
       {
         padecimiento: "Gonartrosis crónica",
-        productos: ["Omevia","Dekamin", "Parches PNG", "Sornie (Collagen Patch)"]
+        productos: ["Omevia", "Dekamin", "Parches PNG", "Sornie (Collagen Patch)"]
         , comentarios: "Tratamiento de 6 meses (Aplicar 3 meses +3 semanas de descanso +Aplicar 3 meses)"
       },
       {
@@ -454,19 +308,19 @@ export class SeederService {
       },
       {
         padecimiento: "Estreñimiento",
-        productos: ["Parches PNG","Slime Style"]
-        , comentarios: "Debajo del ombligo y cada mañana en ayunas beber progresivamente 400ml a 1 litro de agua tibia(temperatura ambiente)"  
-        },
+        productos: ["Parches PNG", "Slime Style"]
+        , comentarios: "Debajo del ombligo y cada mañana en ayunas beber progresivamente 400ml a 1 litro de agua tibia(temperatura ambiente)"
+      },
       {
         padecimiento: "Cistitis, inflamación de tracto urinario hombres",
         productos: ["Nigth Gentlemen", "Parches PNG"]
-        , comentarios: "en la zona umbilical y PNG encima de vejiga."  
-        },
+        , comentarios: "en la zona umbilical y PNG encima de vejiga."
+      },
       {
         padecimiento: "Cistitis, inflamación de tracto urinario mujer",
         productos: ["Nigth Lady's", "Parches PNG"]
-        , comentarios: "en la zona umbilical y PNG encima de vejiga."  
-        },
+        , comentarios: "en la zona umbilical y PNG encima de vejiga."
+      },
       {
         padecimiento: "Desmielinización",
         productos: ["Vitamina B12", "Melatonin Plus", "Omevia"]
@@ -485,8 +339,8 @@ export class SeederService {
       {
         padecimiento: "Neoplasia pancreática",
         productos: ["Parches PNG", "Omevia", "Melatonin Plus"]
-        , comentarios: "PNG medio en pancreas y un entero en el omoplato derecho"  
-        },
+        , comentarios: "PNG medio en pancreas y un entero en el omoplato derecho"
+      },
       {
         padecimiento: "Ataques de pánico",
         productos: ["Vitamina B12", "Melatonin Plus", "Parches PNG"]
@@ -684,7 +538,7 @@ export class SeederService {
       },
       {
         padecimiento: "Inflamaciones articulares (Hidartrosis)",
-          productos: ["Parches PNG"]
+        productos: ["Parches PNG"]
         , comentarios: ""
       },
       {
@@ -730,22 +584,18 @@ export class SeederService {
       {
         padecimiento: "Obesidad hombres",
         productos: ["Parches PNG", "Melatonin Plus", "Omevia", "Slime Style", "Dekamin", "Vitamina B12", "Nigth Gentlemen"]
-          , comentarios: ""  
-        },
+        , comentarios: ""
+      },
       {
         padecimiento: "Obesidad mujeres",
-        productos: ["Parches PNG", "Melatonin Plus", "Omevia", "Slime Style", "Dekamin" , "Vitamina B12", "Nigth Lady's"]
-          , comentarios: ""  
-        },
+        productos: ["Parches PNG", "Melatonin Plus", "Omevia", "Slime Style", "Dekamin", "Vitamina B12", "Nigth Lady's"]
+        , comentarios: ""
+      },
       {
         padecimiento: "Osteoporosis",
         productos: ["Parches PNG", "Dekamin", "Omevia"]
         , comentarios: ""
       },
-
-
-
-
     ];
     for (const seed of recommendationSeeds) {
       // Verificar si ya existe la recomendación por padecimiento
@@ -816,7 +666,57 @@ export class SeederService {
       await this.magazineRepository.save(posts);
       console.log('✅ Post magazine creado.');
     }
+/** 🔸 5️⃣ Crear testimonios */
+const testimonialsData = [
+  {
+    name: 'Luz Delia',
+    location: 'Bogotá',
+    rating: 5,
+    comment: 'Sufría de insomnio y vértigo 😵‍💫 hasta que probó este parche natural 🌿 ¡Le cambió la vida! ✅',
+    type: 'video', 
+    mediaUrl: 'https://www.youtube.com/shorts/sgY-8efQUu4',
+    verified: true,
+  },
+  {
+    name: 'Jared ',
+    location: 'Bogotá',
+    rating: 5,
+    comment: 'Así se usan nuestros kits de prueba ✅ Fáciles, rápidos y 100% naturales 🌿',
+    type: 'video',  
+    mediaUrl: 'https://www.youtube.com/watch?v=ki9TQlFICSo',
+    verified: true,
+  },
+  {
+    name: 'Jose Grajales',
+    location: 'Bogotá',
+    rating: 3,
+    comment: 'Temblor por Parkinson disminuyó tras usar el parche 🌿 ¡Increíble testimonio real! ✅',
+    type: 'video', 
+    mediaUrl: 'https://www.youtube.com/shorts/BYoJVpvMIxM',
+    verified: true,
+  },
+];
+const createdTestimonials = await Promise.all(
+  testimonialsData.map(async (testimonialData) => {
+    let testimonial = await this.testimonialRepository.findOne({ where: { mediaUrl: testimonialData.mediaUrl } });
+    if (!testimonial) {
+      // Aquí creamos el testimonio con los datos asegurándonos de que 'type' es 'video' o 'text'
+      testimonial = this.testimonialRepository.create({
+        ...testimonialData,
+        type: testimonialData.type as 'video' | 'text', // Aseguramos que 'type' sea de tipo 'video' o 'text'
+      });
+      await this.testimonialRepository.save(testimonial);
+    }
+    return testimonial;
+  }),
+);
+
+console.log('✅ Testimonios insertados.');
+
+
+
 
     console.log('🌱 Seed completado para World Salud.');
   }
 }
+

@@ -34,6 +34,7 @@ import { Comment } from './entities/comment.entity';
 import { PerspectiveModule } from './perspective/perspective.module';
 import { RecommendationModule } from './recommendation/recommendation.module';
 import { TestimonialsModule } from './testimonials/testimonials.module';
+import { Testimonial } from './entities/testimonial.entity';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
       Transactions,
       Magazine,
       Comment,
+      Testimonial
     ]),
     ConfigModule.forRoot({
       isGlobal: true,
